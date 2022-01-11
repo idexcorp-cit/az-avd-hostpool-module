@@ -1,7 +1,13 @@
-# Azure Virtual Desktop Personal Hostpool Module
+# Azure Virtual Desktop - Personal Hostpool Module
 ![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/idexcorp-cit/az-avd-personal-hostpool-module/latest/main)
 
 This Terraform module is designed to deploy an Azure Virtual Desktop Hostpool with Personal Desktops. This can be used in conjunction with the [az-avd-personal-host-module](https://github.com/idexcorp-cit/az-avd-personal-host-module) and [az-avd-hostpool-token-module](https://github.com/idexcorp-cit/az-avd-hostpool-token-module) modules.
+
+This module has the following parameters that can be set:
+- `resource_prefix` - **Required** - Prefix for resources created in this module.
+- `location` - **Not Required** - Location for resources (defaults to `centralus`).
+- `tags` - **Not Required** - Tags applied to resources in this module.
+- `friendly_name` - **Not Required** - Friendly name of Hostpool.
 
 This module will have the following attributes output:
 - `hostpool_id` - ID of the Hostpool
@@ -15,7 +21,7 @@ This module will have the following attributes output:
 Here is an example:
 ```terraform
 module "hostpool" {
-    source              = "git::https://github.com/idexcorp-cit/az-avd-personal-hostpool-module.git?ref=v0.1.0"
+    source              = "git::https://github.com/idexcorp-cit/az-avd-personal-hostpool-module.git?ref=v0.1.1"
 
     resource_prefix = "eus-avd"
     location        = "eastus"
@@ -25,7 +31,7 @@ module "hostpool" {
 }
 
 module "hostpool_token" {
-    source                  = "git::https://github.com/idexcorp-cit/az-avd-hostpool-token-module.git?ref=v0.1.0"
+    source                  = "git::https://github.com/idexcorp-cit/az-avd-hostpool-token-module.git?ref=v0.1.1"
 
     hostpool_resource_group = module.hostpool.resource_group_name
     hostpool_name           = module.hostpool.hostpool_name
@@ -45,7 +51,7 @@ resource "azurerm_resource_group" "avd_host" {
 }
 
 module "host" {
-    source                  = "git::https://github.com/idexcorp-cit/az-avd-personal-host-module.git?ref=v0.1.0"
+    source                  = "git::https://github.com/idexcorp-cit/az-avd-personal-host-module.git?ref=v0.1.1"
 
     for_each                = var.avd_users
 
