@@ -15,7 +15,7 @@ This module will have the following attributes output:
 Here is an example:
 ```terraform
 module "hostpool" {
-    source              = "https://github.com/idexcorp-cit/az-avd-personal-hostpool-module.git?ref=v0.1.0"
+    source              = "git::https://github.com/idexcorp-cit/az-avd-personal-hostpool-module.git?ref=v0.1.0"
 
     resource_prefix = "eus-avd"
     location        = "eastus"
@@ -45,7 +45,7 @@ resource "azurerm_resource_group" "avd_host" {
 }
 
 module "host" {
-    source                  = "https://github.com/idexcorp-cit/az-avd-personal-host-module.git?ref=v0.1.0"
+    source                  = "git::https://github.com/idexcorp-cit/az-avd-personal-host-module.git?ref=v0.1.0"
 
     for_each                = var.avd_users
 
